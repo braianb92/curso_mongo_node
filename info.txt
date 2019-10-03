@@ -1,0 +1,81 @@
+SSR : Sever Side Rendering 
+
+React : Libreria de Front-End. Tiene estructura de arbol invertido en forma de componentes autocontenido en su propio archivo y usa, por lo general, sintaxis vanilla de JS. Para mostrar HTML usa JSX, una sintaxis especial para generar nodos, con lo cual tenemos que compilar siempre el codigo fuente. 
+
+> npm init -y 
+> npm i -D webpack webpack-cli webpack-dev-server html-webpack-plugin 
+> npm i -D @babel/core babel-loader @babel/preset-env @babel/preset-react
+
+Webpack : Bundler 
+Dependencias : 
+    - webpack : core
+    - webpack-cli : ejecuta webpack core por CLI 
+    - webpack-dev-server : Hot Module Replacement 
+    - html-webpack-plugin : construye la plantilla de HTML con todo lo que compilemos automaticamente 
+    * - mini-css-extract-plugin   
+
+Babel : Transpilador 
+Dependencias : 
+    - @babel/core : core
+    - babel-loader : comunica webpack con babel
+    - @babel/preset-env : transforma a ES5
+    - @babel/preset-react : transforma JSX
+
+MongoDB: NoSQL
+
+    NoSQLBooster,RoboMongo(trial)
+
+    Path: (variable de entorno)
+        c:/Program Files/MongoDB/Server/3.6/bin
+
+    Ejecutables: 
+        - mongod(daemon) : Levante instancia de un servidor(ReplSet,ConfigSvr).
+            Por defecto la data se va a guardar en $ROOT/data/db
+        - mongo(cliente): Es el q se conecta a un router o un daemon
+        - mongos(routers): Levanta instancia de un router
+        - mongoexport: Exporta data en JSON,CSV,etc
+        - mongoimport: Importa data exportada de mongoexport
+        - mongodump: Exporta data en BSON
+        - mongorestore: Importa data de un mongodump
+    BSON : Binary JSON {}
+    Todos los BSON tienen un _id y por defecto es del tipo ObjectID().
+    Lo que si se puede es customizarlo pasandole una propiedad _id al documento para insertar.
+
+    DER Diagrama Entidad Relacion no Tiene
+
+    Comandos:
+        --dbpath "carpeta": Ruta de almacenamiento de la db(Directorio).
+        --logpath "carpeta/log.txt": Ruta de almacenamiento de los logs(archivo).
+        --port "nuevo puerto": El puerto por defecto del daemon (27017).
+        - use <db> : Si no esta creada, crea una DB. Y nos mueve a ella.
+        - db: dice el nombre de la DB actual.
+        -(Tablas-->Colecciones)
+            - db.createCollection("<nombre de coleccion>"[,options]): Crea una coleccion. Sirve especificamente si queremos crear capped collections.
+                options:
+                    capped: Boolean - determina si es capped o no
+                    size: Number - cantidad de bytes total que puede almacenar la coleccion
+                    max: Number - cantidad maxima de documentos que puede almacenar la coleccion
+            ---------------------------------------------------------------------
+                capped collection: son Colecciones que Tienen limites
+                de almacenamiento, tanto de tamaño de coleccion como 
+                cantidad de documentos que pueden almacenar. Usan el sis FIFO.
+            ---------------------------------------------------------------------
+
+            - db.<"coleccion">.insert(Document): Guarda un nuevo documento en esa collection
+            - db.collection.find()
+            - db.collection.find().pretty()
+            - db.collection.find({x:1}) : Realiza un filtro por comparacion a igualdad
+                SELECT * FROM COLLECTION WHERE X=1
+
+            - db.collection.find({x:1,y:2}) :
+                SELECT * FROM COLLECTION WHERE X=1 AND Y=2
+
+            - db.collection.update(<query>,<update>) : Reemplaza, no actualiza.
+                query: Document
+                update: Document
+            - db.collection.update(<query>,{ $set : { lo que quiero modificar }})
+                UPDATE COLLECTION SET X=1 WHERE id = 1
+            -db.coleccion.update(<query>,<update>,{ multi : true, upsert: true })
+                multi: actualiza varios
+                upsert: si no lo encuentra lo crea
+            
