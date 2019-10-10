@@ -1,0 +1,21 @@
+//https://github.com/SouthbankSoftware/dbkoda-data.git
+
+HABILITAR MONGODB EN NODE
+
+1) Instalar el driver de MongoDB
+    > npm i mongodb
+
+2) Traer el modula al archivo servidor
+    const monbgodb = require("mongodb")
+
+3) Sacar MongoClient del modulo de mongodb (opcional)
+    let cliente = monbgodb.MongoClient;
+
+4) Hacer la conexion
+    cliente.connect(url string, options Object, callback function)
+
+5) Conectarse a una base de datos(seria analogo a hacer un "use<db>")
+    data.db(nombre string) => Db;
+-----------------------------------------------------------------------------------------------
+* Asegurense que ambos dos servidores corran, entonces ejevutar el listen adentro del connect *
+-----------------------------------------------------------------------------------------------
